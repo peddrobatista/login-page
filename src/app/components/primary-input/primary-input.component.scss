@@ -1,0 +1,40 @@
+@import "../../../styles/variables.scss";
+
+.input-wrapper {
+  font-size: 16px;
+  color: $text-color;
+  text-align: start;
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  .input-content {
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    .icon {
+      padding: 13px;
+      background-color: $primary-color;
+      border-radius: 0 8px 8px 0;
+
+      img {
+        height: 20px;
+      }
+    }
+
+    input {
+      border: 1px solid $gray-secundary-bg;
+      border-radius: 8px 0 0 8px;
+      background-color: $gray-secundary-bg;
+      padding: 12px 0 12px 20px;
+      width: 100%;
+      outline: none;
+
+      &:focus {
+        border: 2px solid $primary-color; // mantém a mesma cor ou troque por outra se quiser
+        box-shadow: 0 0 0 2px lighten($primary-color, 30%); // efeito extra se quiser destaque
+      }
+    }
+  }
+}
