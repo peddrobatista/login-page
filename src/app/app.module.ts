@@ -7,6 +7,8 @@ import { DefaultLoginLayoutComponent } from './components/default-login-layout/d
 import { LoginComponent } from './pages/login/login.component';
 import { PrimaryInputComponent } from './components/primary-input/primary-input.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     LoginComponent,
     DefaultLoginLayoutComponent,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     PrimaryInputComponent,
   ],
   providers: [],

@@ -12,8 +12,14 @@ import { DefaultLoginLayoutComponent } from 'src/app/components/default-login-la
 import { PrimaryInputComponent } from 'src/app/components/primary-input/primary-input.component';
 import { LoginService } from 'src/app/services/login.service';
 
+interface SignupForm {
+  name: FormControl;
+  email: FormControl;
+  password: FormControl;
+  confirmPassword: FormControl;
+}
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   standalone: true,
   imports: [
     DefaultLoginLayoutComponent,
@@ -21,19 +27,24 @@ import { LoginService } from 'src/app/services/login.service';
     PrimaryInputComponent,
   ],
   providers: [LoginService],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
 })
-export class LoginComponent {
-  loginForm!: FormGroup;
+export class SignupComponent {
+  signupForm!: FormGroup<SignupForm>;
   constructor(
     private router: Router,
     private loginService: LoginService,
     private toastService: ToastrService
   ) {
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      confirmPassword: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
       ]),
@@ -42,14 +53,18 @@ export class LoginComponent {
 
   submit() {
     this.loginService
-      .login(this.loginForm.value.email, this.loginForm.value.password)
+      .signup(
+        this.signupForm.value.name,
+        this.signupForm.value.email,
+        this.signupForm.value.password
+      )
       .subscribe({
         next: () => this.toastService.success('Login realizado com sucesso!'),
-        error: () => this.toastService.error('Erro ao fazer login!'),
+        error: (error) => this.toastService.error('Erro ao fazer login!'),
       });
   }
 
   navigate() {
-    this.router.navigate(['/signup']);
+    this.router.navigate(['/login']);
   }
 }
