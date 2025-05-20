@@ -19,3 +19,9 @@ Certifique-se de que você tenha instalado os seguintes softwares:
    ```bash
    git clone https://github.com/peddrobatista/login-page.git
    ```
+
+## Execução
+
+```bash
+npm run start
+```
